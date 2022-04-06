@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import './contact.css';
 
 class Contact extends React.Component {
     constructor(props) {
@@ -41,8 +42,8 @@ class Contact extends React.Component {
     render() {
         return (
             <div className='contact'>
-                <form id='contact-form' onSubmit={this.handleSubmit.bind(this)} method="POST"
-                >
+                <h1 className='contact-header'>Contact</h1>
+                <form id='contact-form' onSubmit={this.handleSubmit.bind(this)} method="POST">
                     <div className='form-group'>
                         <label>Civilité</label>
                         <input type="text" name='civility' required/>
