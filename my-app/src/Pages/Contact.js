@@ -19,20 +19,58 @@ class Contact extends React.Component {
         }
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        axios({
-            method: "POST",
-            url: "http://localhost:3000/send",
-            data: this.state
-        }).then((response)=>{
-            if (response.data.status === 'success') {
-                alert("Votre requête est bien envoyée.");
-                this.resetForm()
-            } else if (response.data.status === 'fail') {
-                alert("Votre requête n'a pas pu être envoyée.")
-            }
-        })
+    handleCivilityChange = (event) => {
+        this.setState({[event.target.civility]: event.target.value});
+		}
+
+		handleFnameChange = (event) => {
+        this.setState({[event.target.fname]: event.target.value});
+		}
+
+		handleLnameChange = (event) => {
+        this.setState({[event.target.lname]: event.target.value});
+		}
+
+		handleEmailChange = (event) => {
+        this.setState({[event.target.email]: event.target.value});
+		}
+
+		handleAddressChange = (event) => {
+        this.setState({[event.target.address]: event.target.value});
+		}
+
+		handlePostalChange = (event) => {
+        this.setState({[event.target.postal]: event.target.value});
+		}
+
+		handleCityChange = (event) => {
+        this.setState({[event.target.city]: event.target.value});
+		}
+
+		handleCountryChange = (event) => {
+        this.setState({[event.target.country]: event.target.value});
+		}
+
+		handleJobChange = (event) => {
+        this.setState({[event.target.job]: event.target.value});
+		}
+
+		handleMessageChange = (event) => {
+        this.setState({[event.target.message]: event.target.value});        
+    }
+
+    handleSubmit = (event) => {
+        alert('Votre formulaire a été envoyé: ' + this.state);
+				
+        fetch('http://localhost:3000/send', {
+            method: 'POST',
+            body: JSON.stringify(this.state)
+        }).then(function(response) {
+            console.log(response)
+            return response.json();
+        });
+
+        event.preventDefault();
     }
 
     resetForm() {
@@ -43,93 +81,54 @@ class Contact extends React.Component {
         return (
             <div className='contact'>
                 <h1 className='contact-header'>Contact</h1>
-                <form id='contact-form' onSubmit={this.handleSubmit.bind(this)} method="POST">
+                <form id='contact-form' onSubmit={this.handleSubmit}>
                     <div className='form-group'>
                         <label>Civilité</label>
-                        <input type="text" name='civility' required/>
+                        <input type="text" value={this.state.value} name='civility' onChange={this.handleCivilityChange} required/>
                     </div>
                     <div className='form-group'>
                         <label>Prénom</label>
-                        <input type="text" name='fname' required/>
+                        <input type="text" value={this.state.value} name='fname' onChange={this.handleFnameChange} required/>
                     </div>
                     <div className='form-group'>
                         <label>Nom</label>
-                        <input type="text" name='lname' required/>
+                        <input type="text" value={this.state.value} name='lname' onChange={this.handleLnameChange} required/>
                     </div>
                     <div className='form-group'>
                         <label>Adresse mail</label>
-                        <input type="email" name='email' required/>
+                        <input type="email" value={this.state.value} name='email' onChange={this.handleEmailChange} required/>
                     </div>
                     <div className='form-group'>
                         <label>Adresse</label>
-                        <input type="text" name='address' required/>
+                        <input type="text" value={this.state.value} name='address' onChange={this.handleAddressChange} required/>
                     </div>
                     <div className='form-group'>
                         <label>Code Postal</label>
-                        <input type="text" name='postal' required/>
+                        <input type="number" value={this.state.value} name='postal' onChange={this.handlePostalChange} required/>
                     </div>
                     <div className='form-group'>
                         <label>Ville</label>
-                        <input type="text" name='city' required/>
+                        <input type="text" value={this.state.value} name='city' onChange={this.handleCityChange} required/>
                     </div>
                     <div className='form-group'>
                         <label>Pays</label>
-                        <input type="text" name='country' required/>
+                        <input type="text" value={this.state.value} name='country' onChange={this.handleCountryChange} required/>
                     </div>
                     <div className='form-group'>
                         <label>Profession</label>
-                        <input type="text" name='job' required/>
+                        <input type="text" value={this.state.value} name='job' onChange={this.handleJobChange} required/>
                     </div>
                     <div className='form-group'>
                         <label>Message</label>
-                        <textarea name='message' required/>
+                        <textarea name='message' value={this.state.value} onChange={this.handleMessageChange} 
+												required/>
                     </div>
                     <div className='form-group'>
-                        <button type='submit' className='btn'>Envoyer</button>
+                        <button type='submit' value= 'Submit' className='btn'>Envoyer</button>
                     </div>
                 </form>
             </div>
         );
-    }
-
-    onCivilityChange(event) {
-        this.setState({civility: event.target.value})
-    }
-
-    onFnameChange(event) {
-        this.setState({fname: event.target.value})
-    }
-    
-    onLnameChange(event) {
-        this.setState({lname: event.target.value})
-    }
-
-    onEmailChange(event) {
-        this.setState({email: event.target.value})
-    }
-
-    onAddressChange(event) {
-        this.setState({address: event.target.value})
-    }
-
-    onPostalChange(event) {
-        this.setState({postal: event.target.value})
-    }
-
-    onCityChange(event) {
-        this.setState({city: event.target.value})
-    }
-
-    onCountryChange(event) {
-        this.setState({country: event.target.value})
-    }
-
-    onJobChange(event) {
-        this.setState({job: event.target.value})
-    }
-
-    onMessageChange(event) {
-        this.setState({message: event.target.value})
     }
 }
 

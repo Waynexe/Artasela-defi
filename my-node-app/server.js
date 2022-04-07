@@ -1,38 +1,29 @@
 const express = require("express");
-const bodyParser = require('body-parser');
 const cors = require("cors");
- 
 const app = express();
- 
-app.use(cors());
-// parse application/json
-app.use(bodyParser.json());
-  
-//create database connection
-const conn = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'my_db'
+const db = require("./app/models");
+require("./app/routes/user.routes")(app);
+
+var corsOptions = {
+  origin: "http://localhost:3001",
+};
+
+app.use(cors(corsOptions));
+// parse requests of content-type - application/json
+app.use(express.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+// simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Salut" });
 });
- 
-//connect to database
-conn.connect((err) =>{
-  if(err) throw err;
-  console.log('Mysql Connected...');
-});
- 
- 
-//add new user
-app.post('/send',(req, res) => {
-  let data = {name: req.body.name};
-  let sql = "INSERT INTO users SET ?";
-  let query = conn.query(sql, data,(err, results) => {
-    if(err) throw err;
-    res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+
+db.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync db.");
   });
-});
- 
-app.listen(3000, () => {
-  console.log("Server running successfully on 3000");
+
+// set port, listen for requests
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
 });
