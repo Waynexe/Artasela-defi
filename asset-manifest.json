@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Artasela-defi/static/css/main.1497f66c.css",
-    "main.js": "/Artasela-defi/static/js/main.33815b61.js",
-    "static/js/787.45bb5bd2.chunk.js": "/Artasela-defi/static/js/787.45bb5bd2.chunk.js",
-    "index.html": "/Artasela-defi/index.html",
-    "main.1497f66c.css.map": "/Artasela-defi/static/css/main.1497f66c.css.map",
-    "main.33815b61.js.map": "/Artasela-defi/static/js/main.33815b61.js.map",
-    "787.45bb5bd2.chunk.js.map": "/Artasela-defi/static/js/787.45bb5bd2.chunk.js.map"
+    "main.css": "/defi-artasela/static/css/main.1497f66c.css",
+    "main.js": "/defi-artasela/static/js/main.3bdf5674.js",
+    "static/js/787.45bb5bd2.chunk.js": "/defi-artasela/static/js/787.45bb5bd2.chunk.js",
+    "index.html": "/defi-artasela/index.html",
+    "main.1497f66c.css.map": "/defi-artasela/static/css/main.1497f66c.css.map",
+    "main.3bdf5674.js.map": "/defi-artasela/static/js/main.3bdf5674.js.map",
+    "787.45bb5bd2.chunk.js.map": "/defi-artasela/static/js/787.45bb5bd2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1497f66c.css",
-    "static/js/main.33815b61.js"
+    "static/js/main.3bdf5674.js"
   ]
 }
